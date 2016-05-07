@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Flask</h1>
+    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<div ng-app="FasteignApp" ng-controller="FasteignListCtrl">
+    <h1>Hello {{ '{{ errorMsg }}'}}</h1>
+    <div class="row">
+        <div id="grid1" ui-grid="{ data: houses }" class="grid"></div>
+       <!-- <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="house in houses">
+                    <td>{{ '{{house.id}}' }}</td>
+                    <td>{{ '{{house.url}}' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        -->
+    </div>
+</div>
+
+{% endblock %}
