@@ -39,5 +39,8 @@ def about():
 
 @app.route('/get')
 def get():
-    results = Fasteignir.query.order_by(Fasteignir.skrad_a_vef.desc())[0:15]
-    return jsonify({'success': False, 'houses': [{'id': item.ID, 'url': item.url} for item in results]})
+    results = Fasteignir.query.order_by(Fasteignir.ID.desc())[0:10]
+    return jsonify({'success': True, 
+                    'houses': [{'Tegund': item.tegund, 'staerd': str(item.staerd), 'Herberg': str(item.herbergi), 'Heimilisfang': item.address, 
+                                'byggingar_ar': item.byggingarar, 'skrad': str(item.skrad_a_vef), 'Fasteignamat': str(item.fasteignamat), 'Brunabotamat': str(item.brunabotamat), 
+                                'Verd': str(item.Verd), 'Seld': item.Seld} for item in results]})
