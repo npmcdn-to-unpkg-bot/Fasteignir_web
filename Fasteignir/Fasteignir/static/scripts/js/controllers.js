@@ -67,18 +67,28 @@ FasteignListi.controller('FasteignListCtrl', function ($scope, $http, $timeout, 
         }
     ];
 
-    $http.get("/get")
-    .then(function (response) {
-        if (response.status == 202) {
-            $scope.loading = true;
-        }
-        else if (response.status == 200) {
-            $scope.loading = false;
-            $scope.gridOptions.data = response.data.houses;
-        }
-    }, function (response) {
-        $scope.errorMsg = "Something went wrong";
-    });
+
+    var poller = function () {
+        $http.get('/get').then(function (response) {
+            if (response.status == 202) {
+                $scope.loading = true;
+            }
+            else if (response.status == 200) {
+                $scope.loading = false;
+                $scope.gridOptions.data = response.data.houses;
+            }
+        }, function (response) {
+            $scope.errorMsg = "Something went wrong";
+        });
+    }
+
+    $scope.getData = function () {
+        $scope.loading = true;
+        $timeout(function () {
+            poller();
+        }, 2000);
+    }
+
 })
 .filter('SeldFilter', function () {
     return function(input) {

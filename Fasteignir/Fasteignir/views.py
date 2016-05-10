@@ -24,7 +24,7 @@ def contact():
         'contact.html',
         title='Contact',
         year=datetime.now().year,
-        message='Your contact page.'
+        message='You can contact me by sending me an email.'
     )
 
 @app.route('/about')
@@ -34,12 +34,13 @@ def about():
         'about.html',
         title='About',
         year=datetime.now().year,
-        message='Your application description page.'
+        message='This webpage is based on a software that crawls the Icelandic housing market and records '+
+        ' information which again is shown with the help of a highly advanced javascript software.'
     )
 
 @app.route('/get')
 def get():
-    results = Fasteignir.query.order_by(Fasteignir.ID.desc())[0:500]
+    results = Fasteignir.query.order_by(Fasteignir.ID.desc())[0:1000]
     return jsonify({'success': True, 
                     'houses': [{'Tegund': item.tegund, 'staerd': str(item.staerd), 'Herbergi': str(item.herbergi), 'Heimilisfang': item.address, 
                                 'byggingar_ar': item.byggingarar, 'skrad': str(item.skrad_a_vef), 'Fasteignamat': '{:,.0f} kr'.format(item.fasteignamat), 'Brunabotamat': '{:,.0f} kr'.format(item.brunabotamat), 

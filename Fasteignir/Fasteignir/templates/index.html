@@ -3,33 +3,32 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h1>Flask</h1>
-    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    <br />
+    <h3>Hello, here you can filter and do advanced analysis on the appartment/housing market in Iceland. Press the load data button to get started.</h3>
 </div>
 
 <div ng-app="FasteignApp" ng-controller="FasteignListCtrl">
-    <h1>Hello {{ '{{ errorMsg }}'}}</h1>
+    <button type="button" class="btn btn-success" ng-click="getData()">Load Data</button>
+    <br />
+    <br />
     <div class="row">
-        <div id="grid1" ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping ui-grid-pagination class="grid"></div>
-       <!-- <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Url</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="house in houses">
-                    <td>{{ '{{house.id}}' }}</td>
-                    <td>{{ '{{house.url}}' }}</td>
-                </tr>
-            </tbody>
-        </table>
-        -->
+        <div id="grid1" ui-grid="gridOptions" ui-grid-cellNav ui-grid-resize-columns ui-grid-pinning ui-grid-selection
+             ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping ui-grid-pagination class="grid">
+            <div class="grid-msg-overlay" ng-hide="!loading">
+                <div class="msg">
+                    <span>
+                        Loading Data...
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="grid-msg-overlay" ng-hide="loading || gridOptions.data.length ">
+                <div class="msg">
+                    <span>No Data</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <img class="col-sm-3 col-sm-offset-4" src="{{ url_for('static',
-  filename='spinner.gif') }}" ng-show="loading">
 </div>
 
 {% endblock %}
