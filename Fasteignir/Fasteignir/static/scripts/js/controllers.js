@@ -1,8 +1,10 @@
-﻿var FasteignListi = angular.module('FasteignApp', ['ngTouch', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping']);
+﻿var FasteignListi = angular.module('FasteignApp', ['ngTouch', 'ui.grid', 'ui.grid.cellNav', 'ui.grid.resizeColumns', 'ui.grid.pinning', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.moveColumns', 'ui.grid.exporter', 'ui.grid.importer', 'ui.grid.grouping']);
 
-FasteignListi.controller('FasteignListCtrl', function ($scope, $http, uiGridConstants, uiGridGroupingConstants) {
+FasteignListi.controller('FasteignListCtrl', function ($scope, $http, $timeout, uiGridConstants, uiGridGroupingConstants) {
 
     $scope.gridOptions = {};
+    $scope.gridOptions.paginationPageSizes = [50, 100, 200];
+    $scope.gridOptions.paginationPageSize = 100;
     $scope.gridOptions.enableColumnResizing = true;
     $scope.gridOptions.enableFiltering = true;
     $scope.gridOptions.enableGridMenu = true;
@@ -10,48 +12,81 @@ FasteignListi.controller('FasteignListCtrl', function ($scope, $http, uiGridCons
     $scope.gridOptions.showColumnFooter = true;
     $scope.gridOptions.fastWatch = true;
 
-    $scope.highlightFilteredHeader = function (row, rowRenderIndex, col, colRenderIndex) {
-        if (col.filters[0].term) {
-            return 'header-filtered';
-        } else {
-            return '';
+    $scope.gridOptions.columnDefs = [
+        { field: 'Tegund', displayName: 'Tegund' },
+        {
+            field: 'staerd', displayName: 'Stærð', width: 85,
+            filters: [
+                {
+                    condition: uiGridConstants.filter.GREATER_THAN,
+                    placeholder: 'stærra en'
+                },
+                {
+                    condition: uiGridConstants.filter.LESS_THAN,
+                    placeholder: 'minna en'
+                }
+            ]
+        },
+        {
+            field: 'Herbergi', displayName: 'Herbergi',
+            filters: [
+                {
+                    condition: uiGridConstants.filter.GREATER_THAN,
+                    placeholder: 'stærra en'
+                },
+                {
+                    condition: uiGridConstants.filter.LESS_THAN,
+                    placeholder: 'minna en'
+                }
+            ]
+        },
+        { field: 'Heimilisfang', displayName: 'Heimilisfang', width: 130 },
+        { field: 'byggingar_ar', displayName: 'Byggingarár', width: 130 },
+        { field: 'skrad', displayName: 'Skráð á vef', width: 120, cellFilter: 'date:YYYY-MM-DD', filterCellFiltered: true, sortCellFiltered: true, type: 'date' },
+        { field: 'Fasteignamat', displayName: 'Fasteignamat', width: 130 },
+        { field: 'Brunabotamat', displayName: 'Brunabótamat', width: 140 },
+        {
+            field: 'Verd', displayName: 'Verð',
+            filters: [
+               {
+                   condition: uiGridConstants.filter.GREATER_THAN,
+                   placeholder: 'stærra en'
+               },
+               {
+                   condition: uiGridConstants.filter.LESS_THAN,
+                   placeholder: 'minna en'
+               }
+            ]
+        },
+        {
+            field: 'Seld', displayName: 'Seld', width: 60, enableColumnMenu: false,
+            filter: { type: uiGridConstants.filter.SELECT,
+                selectOptions: [ { value: 'No', label: 'Nei' }, { value: 'Yes', label: 'Já' }]
+                },
+            cellFilter: 'SeldFilter'
         }
-    };
+    ];
 
     $http.get("/get")
     .then(function (response) {
-        $scope.gridOptions.data = response.data.houses;
-        $scope.gridOptions.columnDefs = [
-            { name: 'Tegund' },
-            { name: 'Stærð', aggregationType: uiGridConstants.aggregationType.avg, treeAggregationType: uiGridGroupingConstants.aggregation.AVG },
-            {
-                name: 'Herbergi', aggregationType: uiGridConstants.aggregationType.avg, treeAggregationType: uiGridGroupingConstants.aggregation.AVG,
-                filters: [
-                    {
-                        condition: uiGridConstants.filter.GREATER_THAN,
-                        placeholder: 'greater than'
-                    },
-                    {
-                        condition: uiGridConstants.filter.LESS_THAN,
-                        placeholder: 'less than'
-                    }],
-                headerCellClass: $scope.highlightFilteredHeader
-            },
-            { name: 'Heimilisfang' },
-            { name: 'Byggingar ár' },
-            { name: 'Skráð á vef', cellFilter: 'date:YYYY-MM-DD', filterCellFiltered: true, sortCellFiltered: true, type: 'date' },
-            { name: 'Fasteignamat' },
-            { name: 'Brunabótamat' },
-            { name: 'Verð' },
-            {
-                field: 'Seld', filter: {
-                    term: '1',
-                    type: uiGridConstants.filter.SELECT,
-                    selectOptions: [{ value: '1', label: 'Nei' }, { value: '2', label: 'Já' }]
-                }
-            },
-        ];
+        if (response.status == 202) {
+            $scope.loading = true;
+        }
+        else if (response.status == 200) {
+            $scope.loading = false;
+            $scope.gridOptions.data = response.data.houses;
+        }
     }, function (response) {
         $scope.errorMsg = "Something went wrong";
     });
+})
+.filter('SeldFilter', function () {
+    return function(input) {
+        switch(input) {
+            case 'Yes':
+                return 'Já';
+            case 'No':
+                return 'Nei';
+        }
+    }
 });
