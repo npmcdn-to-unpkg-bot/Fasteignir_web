@@ -501,6 +501,7 @@
     <Content Include="Fasteignir\static\scripts\angular-ui-grid\ui-grid.ttf" />
     <Content Include="Fasteignir\static\scripts\angular-ui-grid\ui-grid.woff" />
     <Content Include="Fasteignir\static\scripts\angular.min.js" />
+    <Content Include="Fasteignir\static\scripts\analytics.js" />
     <Content Include="Fasteignir\static\scripts\bootstrap.js" />
     <Content Include="Fasteignir\static\scripts\bootstrap.min.js" />
     <Content Include="Fasteignir\static\scripts\docs\components\bootstrap-3.1.1\css\bootstrap-theme.css" />

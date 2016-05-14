@@ -2,13 +2,13 @@
   padding: 10px;
 }
 
-/*
-    If I want to control the size of the ui.grid
+
+    /*If I want to control the size of the ui.grid
 .grid {
   width: 100%;
-  height: 250px;
+  height: 750px;
 }
- */
+        */
 
 .grid-msg-overlay {
   position: absolute;

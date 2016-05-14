@@ -67,7 +67,6 @@ FasteignListi.controller('FasteignListCtrl', function ($scope, $http, $timeout, 
         }
     ];
 
-
     var poller = function () {
         $http.get('/get').then(function (response) {
             if (response.status == 202) {
