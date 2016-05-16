@@ -7,6 +7,7 @@ from datetime import datetime
 from flask import request, jsonify, session, redirect, render_template, send_from_directory
 from Fasteignir.models import Fasteignir, Fasteignir_changes
 from Fasteignir import app
+from functools import wraps
 
 @app.route('/')
 @app.route('/home')
@@ -77,4 +78,19 @@ def callback_handling():
 
   # Redirect to the User logged in page that you want here
   # In our case it's /dashboard
-  return redirect('/dashboard')
+  return redirect('/about')
+
+@app.route("/dashboard")
+@requires_auth
+def dashboard():
+    return render_template('about.html', user=session['profile'])
+
+def requires_auth(f):
+  @wraps(f)
+  def decorated(*args, **kwargs):
+    if 'profile' not in session:
+      # Redirect to Login page here
+      return redirect('/')
+    return f(*args, **kwargs)
+
+  return decorated
