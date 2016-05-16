@@ -9,6 +9,16 @@ from Fasteignir.models import Fasteignir, Fasteignir_changes
 from Fasteignir import app
 from functools import wraps
 
+def requires_auth(f):
+  @wraps(f)
+  def decorated(*args, **kwargs):
+    if 'profile' not in session:
+      # Redirect to Login page here
+      return redirect('/')
+    return f(*args, **kwargs)
+
+  return decorated
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -84,13 +94,3 @@ def callback_handling():
 @requires_auth
 def dashboard():
     return render_template('about.html', user=session['profile'])
-
-def requires_auth(f):
-  @wraps(f)
-  def decorated(*args, **kwargs):
-    if 'profile' not in session:
-      # Redirect to Login page here
-      return redirect('/')
-    return f(*args, **kwargs)
-
-  return decorated
