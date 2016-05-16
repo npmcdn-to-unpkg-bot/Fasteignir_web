@@ -9,6 +9,7 @@
 
 <div ng-app="FasteignApp" ng-controller="FasteignListCtrl">
     <button type="button" class="btn btn-success" ng-click="getData()">Load Data</button>
+    <button type="button" class="btn btn-info" onclick="window.signin();">Login</button>
     <br />
     <br />
     <div class="row">
@@ -30,5 +31,19 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
+<script type="text/javascript">
+    var lock = new Auth0Lock('wKZQqy9iZXSKjpzQAQxThFMtYRz1IVu7', 'blago.eu.auth0.com');
 
+
+  function signin() {
+    lock.show({
+        callbackURL: 'http://h2553182.stratoserver.net/callback'
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
+      }
+    });
+  }
+</script>
 {% endblock %}

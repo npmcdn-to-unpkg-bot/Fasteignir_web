@@ -3169,6 +3169,7 @@
     <Content Include="Fasteignir\static\scripts\respond.min.js" />
     <Content Include="Fasteignir\static\scripts\ui-grid.min.js" />
     <Content Include="Fasteignir\static\scripts\version.json" />
+    <Content Include="Fasteignir\templates\login.html" />
     <Content Include="requirements.txt" />
     <Content Include="Fasteignir\static\content\bootstrap.css" />
     <Content Include="Fasteignir\static\content\bootstrap.min.css" />

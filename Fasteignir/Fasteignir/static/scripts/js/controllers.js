@@ -85,7 +85,7 @@ FasteignListi.controller('FasteignListCtrl', function ($scope, $http, $timeout, 
         $scope.loading = true;
         $timeout(function () {
             poller();
-        }, 2000);
+        }, 20000);
     }
 
 })
