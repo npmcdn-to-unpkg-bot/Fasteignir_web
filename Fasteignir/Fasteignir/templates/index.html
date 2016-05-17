@@ -9,7 +9,7 @@
 
 <div ng-app="FasteignApp" ng-controller="FasteignListCtrl">
     <button type="button" class="btn btn-success" ng-click="getData()">Load Data</button>
-    <button type="button" class="btn btn-info" onclick="window.signin();">Login</button>
+    <button class="btn btn-info btn-xs signin-google" onclick=window.signin();>Sign in with Google</button>
     <br />
     <br />
     <div class="row">
@@ -31,19 +31,13 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
-<script type="text/javascript">
-    var lock = new Auth0Lock('wKZQqy9iZXSKjpzQAQxThFMtYRz1IVu7', 'blago.eu.auth0.com');
+<script src="/static/scripts/angular.min.js"></script>
+<script src="/static/scripts/angular-animate.min.js"></script>
+<script src="/static/scripts/angular-touch.min.js"></script>
+<script src="/static/scripts/angular-ui-grid/ui-grid.min.js"></script>
+<script src="/static/scripts/js/controllers.js"></script>
+<script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+<script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+<script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
 
-
-  function signin() {
-    lock.show({
-        callbackURL: 'http://h2553182.stratoserver.net/callback'
-      , responseType: 'code'
-      , authParams: {
-        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
-      }
-    });
-  }
-</script>
 {% endblock %}

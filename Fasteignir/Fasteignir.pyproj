@@ -502,6 +502,7 @@
     <Content Include="Fasteignir\static\scripts\angular-ui-grid\ui-grid.woff" />
     <Content Include="Fasteignir\static\scripts\angular.min.js" />
     <Content Include="Fasteignir\static\scripts\analytics.js" />
+    <Content Include="Fasteignir\static\scripts\auth0-6.7.min.js" />
     <Content Include="Fasteignir\static\scripts\bootstrap.js" />
     <Content Include="Fasteignir\static\scripts\bootstrap.min.js" />
     <Content Include="Fasteignir\static\scripts\docs\components\bootstrap-3.1.1\css\bootstrap-theme.css" />
@@ -3155,8 +3156,6 @@
     <Content Include="Fasteignir\static\scripts\i18n\angular-locale_zu.js" />
     <None Include="Fasteignir\static\scripts\jquery.validate-vsdoc.js" />
     <None Include="Fasteignir\static\scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Fasteignir\static\scripts\jquery-1.10.2.js" />
-    <Content Include="Fasteignir\static\scripts\jquery-1.10.2.min.js" />
     <Content Include="Fasteignir\static\scripts\jquery-1.10.2.min.map" />
     <Content Include="Fasteignir\static\scripts\jquery.validate.js" />
     <Content Include="Fasteignir\static\scripts\jquery.validate.min.js" />
@@ -3164,6 +3163,7 @@
     <Content Include="Fasteignir\static\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Fasteignir\static\scripts\js\controllers.js" />
     <None Include="Fasteignir\static\scripts\_references.js" />
+    <Content Include="Fasteignir\static\scripts\lock-9.1.min.js" />
     <Content Include="Fasteignir\static\scripts\modernizr-2.6.2.js" />
     <Content Include="Fasteignir\static\scripts\respond.js" />
     <Content Include="Fasteignir\static\scripts\respond.min.js" />
